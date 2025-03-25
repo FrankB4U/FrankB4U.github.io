@@ -26,8 +26,9 @@
   color: #fff;
   padding: 4px 12px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.7);
+  background: transparent;
   transition: all 0.5s ease;
+  box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
   text-shadow: 
     -1px -1px 0px #ec0eb5,  
      1px -1px 0px #ec0eb5,  
@@ -134,4 +135,23 @@
 .logo {
   filter: brightness(1.2) contrast(1.1);
 }
-
+.panel-1::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url('assets/your-image.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  z-index: 0;
+}
+.split-line {
+  display: block;
+  overflow: hidden;
+}
+.split-word {
+  display: inline-block;
+  background: rgba(255, 0, 0, 0.2); /* temporary red background */
+  padding: 2px 4px;
+  margin: 0 2px;
+}
