@@ -80,7 +80,7 @@
   
     <!-- Text content centered in front of video -->
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-white text-center">
-      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 0846</h2>
+      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 0856</h2>
       <p id="tagline" class="mt-4 text-xl drop-shadow-md">Crafted for elegance. Installed to perfection.</p>
     </div>
     
@@ -142,36 +142,15 @@
     });
   </script>
   <script>
-    const heroVideo = document.getElementById("heroVideo");
-  
-    function ensureVideoPlays() {
-      if (!heroVideo) return;
-  
-      // Try to resume if paused
-      if (heroVideo.paused || heroVideo.readyState < 3) {
-        const playPromise = heroVideo.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              // Success, video resumed
-            })
-            .catch((error) => {
-              // As a fallback, force reload (last resort)
-              heroVideo.load();
-              heroVideo.play();
-            });
-        }
+    document.addEventListener("visibilitychange", function () {
+      const video = document.getElementById("heroVideo");
+      if (document.visibilityState === "visible" && video) {
+        video.pause(); // Force stop in case it’s stuck
+        video.currentTime = 0;
+        video.play().catch((e) => {
+          console.warn("Video play was prevented:", e);
+        });
       }
-    }
-  
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") {
-        ensureVideoPlays();
-      }
-    });
-  
-    window.addEventListener("pageshow", () => {
-      ensureVideoPlays();
     });
   </script>  
   
