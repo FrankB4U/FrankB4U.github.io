@@ -84,7 +84,7 @@
   
     <!-- Text content centered in front of video -->
     <div class="relative z-30 h-full flex flex-col items-center justify-center text-white text-center">
-      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 1047</h2>
+      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 1055</h2>
       <p id="tagline" class="mt-4 text-xl drop-shadow-md">Crafted for elegance. Installed to perfection.</p>
     </div>
     
@@ -152,16 +152,25 @@
       return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     }
   
-    // Resume playback when returning from sleep
     document.addEventListener("visibilitychange", () => {
       if (isiOS() && document.visibilityState === "visible") {
-        video.play().catch(() => {
-          // If play fails, hide video (fallback is visible through CSS background)
-          video.style.display = "none";
+        const newVideo = document.createElement("video");
+        newVideo.id = "heroVideo";
+        newVideo.autoplay = true;
+        newVideo.muted = true;
+        newVideo.loop = true;
+        newVideo.playsInline = true;
+        newVideo.preload = "auto";
+        newVideo.className = "absolute inset w-full h-full object-cover z-10";
+        newVideo.innerHTML = `<source src="assets/herovid.webm" type="video/webm" />Your browser does not support the video tag.`;
+  
+        video.replaceWith(newVideo);
+        newVideo.play().catch(() => {
+          newVideo.style.display = "none";
         });
       }
     });
-  </script>  
+  </script>   
   
 </body>
 </html>
