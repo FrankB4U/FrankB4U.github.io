@@ -70,7 +70,7 @@
 <section class="panel panel-1 relative h-screen overflow-hidden">
 
     <!-- Background video -->
-    <video id="heroVideo" autoplay muted loop playsinline class="absolute w-full h-full object-cover">
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
       <source src="assets/herovid.webm" type="video/webm" />
       Your browser does not support the video tag.
     </video>
@@ -80,7 +80,7 @@
   
     <!-- Text content centered in front of video -->
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-white text-center">
-      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 0833</h2>
+      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass</h2>
       <p id="tagline" class="mt-4 text-xl drop-shadow-md">Crafted for elegance. Installed to perfection.</p>
     </div>
     
@@ -141,28 +141,6 @@
       });
     });
   </script>
-  <script>
-    function restartHeroVideo() {
-      const video = document.getElementById("heroVideo");
-      if (video) {
-        video.load();
-        video.play().catch(e => {
-          console.warn("Video did not autoplay:", e);
-        });
-      }
-    }
-  
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") {
-        restartHeroVideo();
-      }
-    });
-  
-    window.addEventListener("pageshow", () => {
-      restartHeroVideo();
-    });
-  </script>
-  
   
 
 </body>
