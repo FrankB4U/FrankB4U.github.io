@@ -70,17 +70,22 @@
 <section class="panel panel-1 relative h-screen overflow-hidden">
 
     <!-- Background video -->
-    <video id="heroVideo" autoplay muted loop playsinline class="absolute w-full h-full object-cover">
-      <source src="assets/herovid.webm" type="video/webm" />
-      Your browser does not support the video tag.
-    </video>
+    <section id="hero" class="relative w-full h-screen bg-cover bg-center" style="background-image: url('assets/fallback.webp');">
+      <video id="heroVideo" autoplay muted loop playsinline class="absolute w-full h-full object-cover z-10">
+        <source src="assets/herovid.webm" type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
+    
+      <!-- Keep your heading/text/buttons/etc. inside here -->
+    </section>
+    
   
     <!-- Optional overlay to darken video slightly -->
     <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
   
     <!-- Text content centered in front of video -->
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-white text-center">
-      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 0918</h2>
+      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 0956</h2>
       <p id="tagline" class="mt-4 text-xl drop-shadow-md">Crafted for elegance. Installed to perfection.</p>
     </div>
     
@@ -144,17 +149,20 @@
   <script>
     const video = document.getElementById("heroVideo");
   
-    let triedToPlay = false;
+    function isiOS() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
   
-    window.addEventListener("scroll", () => {
-      if (!triedToPlay && video && video.paused) {
-        video.play().catch((e) => {
-          console.log("iOS blocking autoplay after sleep:", e);
+    document.addEventListener("visibilitychange", () => {
+      if (isiOS() && document.visibilityState === "visible") {
+        // Try to play again
+        video.play().catch(() => {
+          // Hide video and let background image show
+          video.style.display = "none";
         });
-        triedToPlay = true;
       }
     });
-  </script>   
+  </script>    
   
 </body>
 </html>
