@@ -80,7 +80,7 @@
   
     <!-- Text content centered in front of video -->
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-white text-center">
-      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 0856</h2>
+      <h2 class="text-5xl font-bold drop-shadow-lg" id="headline">Premium Artificial Grass 0918</h2>
       <p id="tagline" class="mt-4 text-xl drop-shadow-md">Crafted for elegance. Installed to perfection.</p>
     </div>
     
@@ -142,17 +142,19 @@
     });
   </script>
   <script>
-    document.addEventListener("visibilitychange", function () {
-      const video = document.getElementById("heroVideo");
-      if (document.visibilityState === "visible" && video) {
-        video.pause(); // Force stop in case it’s stuck
-        video.currentTime = 0;
+    const video = document.getElementById("heroVideo");
+  
+    let triedToPlay = false;
+  
+    window.addEventListener("scroll", () => {
+      if (!triedToPlay && video && video.paused) {
         video.play().catch((e) => {
-          console.warn("Video play was prevented:", e);
+          console.log("iOS blocking autoplay after sleep:", e);
         });
+        triedToPlay = true;
       }
     });
-  </script>  
+  </script>   
   
 </body>
 </html>
